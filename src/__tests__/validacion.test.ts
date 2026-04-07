@@ -1,5 +1,5 @@
 import { validarCorreo, validarColumnaExcel } from '../services/validacion';
-import { COLUMNAS_REQUERIDAS } from '../types/types';
+import { COLUMNAS_REQUERIDAS } from '../types/index';
 
 describe('validarCorreo', () => {
   it('debe aceptar un correo válido', () => {
