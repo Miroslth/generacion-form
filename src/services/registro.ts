@@ -4,6 +4,7 @@ import { validarCorreo } from './validacion';
 interface ResultadoRegistro {
   exito: boolean;
   mensaje: string;
+  confirmacion?: string;
 }
 
 export function registrarDocente(docente: Docente): ResultadoRegistro {
@@ -19,5 +20,5 @@ export function registrarDocente(docente: Docente): ResultadoRegistro {
     return { exito: false, mensaje: 'La institución es requerida' };
   }
 
-  return { exito: true, mensaje: 'Registro exitoso' };
+  return { exito: true, mensaje: 'Registro exitoso' , confirmacion: `Se ha enviado una confirmación a ${docente.correo}`,};
 }
