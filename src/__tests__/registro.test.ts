@@ -46,3 +46,15 @@ describe('registrarDocente', () => {
     expect(resultado.mensaje).toBe('La institución es requerida');
   });
 });
+
+  it('debe retornar mensaje de confirmación al registrar', () => {
+    const docente: Docente = {
+      nombreCompleto: 'Maria Lopez',
+      correo: 'maria@gmail.com',
+      institucion: 'Colegio San Simon',
+    };
+    const resultado = registrarDocente(docente);
+    expect(resultado.confirmacion).toBe(
+      'Se ha enviado una confirmación a maria@gmail.com',
+    );
+  });
