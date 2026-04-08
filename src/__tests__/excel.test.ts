@@ -32,3 +32,35 @@ describe('procesarExcel', () => {
     expect(resultado.mensaje).toBe('El archivo no contiene datos');
   });
 });
+
+it('debe rechazar curso fuera de rango', () => {
+    const columnas = COLUMNAS_REQUERIDAS as string[];
+    const datos = [
+      {
+        'Nombres estudiante': 'Juan',
+        'Apellidos estudiante': 'Perez',
+        'Primaria/secundaria': 'Primaria',
+        'Curso': 7,
+        'Fecha de nacimiento': '2015-01-01',
+      },
+    ];
+    const resultado = procesarExcel(columnas, datos);
+    expect(resultado.exito).toBe(false);
+    expect(resultado.mensaje).toBe('Curso debe ser un numeral entre 1 y 6');
+  });
+
+  it('debe rechazar curso 0', () => {
+    const columnas = COLUMNAS_REQUERIDAS as string[];
+    const datos = [
+      {
+        'Nombres estudiante': 'Juan',
+        'Apellidos estudiante': 'Perez',
+        'Primaria/secundaria': 'Primaria',
+        'Curso': 0,
+        'Fecha de nacimiento': '2015-01-01',
+      },
+    ];
+    const resultado = procesarExcel(columnas, datos);
+    expect(resultado.exito).toBe(false);
+    expect(resultado.mensaje).toBe('Curso debe ser un numeral entre 1 y 6');
+  });
