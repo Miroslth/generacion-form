@@ -1,5 +1,5 @@
-import { registrarDocente } from '../services/registro';
 import { Docente } from '../types';
+import { registrarDocente, registrarDocenteAsync } from '../services/registro';
 
 describe('registrarDocente', () => {
   it('debe registrar un docente válido', () => {
@@ -54,6 +54,18 @@ describe('registrarDocente', () => {
       institucion: 'Colegio San Simon',
     };
     const resultado = registrarDocente(docente);
+    expect(resultado.confirmacion).toBe(
+      'Se ha enviado una confirmación a maria@gmail.com',
+    );
+  });
+  it('debe enviar confirmación de forma asíncrona', async () => {
+    const docente: Docente = {
+      nombreCompleto: 'Maria Lopez',
+      correo: 'maria@gmail.com',
+      institucion: 'Colegio San Simon',
+    };
+    const resultado = await registrarDocenteAsync(docente);
+    expect(resultado.exito).toBe(true);
     expect(resultado.confirmacion).toBe(
       'Se ha enviado una confirmación a maria@gmail.com',
     );
